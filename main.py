@@ -77,22 +77,18 @@ if len(M_clause.t) > 0:
 else:
     print("\nClause UNSATISFIED ❌")
 """
-    
-    
-    
-    
-    
-    
-    
-    
-import mne
 
-file = "S001R02.edf" 
-data = mne.io.read_raw_edf(file)
-data.pick(['O1..'])
-raw_data = data.get_data()
+import numpy as np
+from sound_mapping import *
+from scipy.io import loadmat
 
-info = data.info
-channels = data.ch_names
+file_path = "neurons\m06cat003spk001a.mat"
+data = loadmat(file_path, simplify_cells=True)
+#print(data.keys())
 
-#print(raw_data[0])
+spikes = data['neuron']
+#print(type(spikes), len(spikes))
+
+"""
+    
+"""
