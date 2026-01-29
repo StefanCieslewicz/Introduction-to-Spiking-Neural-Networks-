@@ -1,4 +1,4 @@
-from brian2 import *
+"""from brian2 import *
 prefs.codegen.target = "numpy"
 
 start_scope()
@@ -76,3 +76,23 @@ if len(M_clause.t) > 0:
     print("\nClause SATISFIED ✅")
 else:
     print("\nClause UNSATISFIED ❌")
+"""
+    
+    
+    
+    
+    
+    
+    
+    
+import mne
+
+file = "S001R02.edf" 
+data = mne.io.read_raw_edf(file)
+data.pick(['O1..'])
+raw_data = data.get_data()
+
+info = data.info
+channels = data.ch_names
+
+#print(raw_data[0])
