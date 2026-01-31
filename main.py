@@ -84,11 +84,13 @@ from scipy.io import loadmat
 
 file_path = "neurons\m06cat003spk001a.mat"
 data = loadmat(file_path, simplify_cells=True)
-#print(data.keys())
+print(data.keys())
 
-spikes = data['neuron']
+spikes = data['neuron'][:5000]
 #print(type(spikes), len(spikes))
+#print(spikes)
+
 
 """
-    
+    bru
 """
