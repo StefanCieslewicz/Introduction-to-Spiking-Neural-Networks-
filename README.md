@@ -1,8 +1,8 @@
-# Sonification-of-artificial-neural-activity-
+# Sonification-of-neural-activity-and?
 New media project for Radboud's AI honours programme.
 
-Will use brian2 for snn
-This data for bio neuron train spikes https://www.nature.com/articles/s41597-025-05130-5?utm_source=chatgpt.com#citeas
+Will use brian2 for snn; will I even use snn for this? 
+
 Study resources:
-    - Hands on session with snnTorch - Jason Esghraghian - 2nd March 2023 | open-neuromorphic 
+    - 
     - 

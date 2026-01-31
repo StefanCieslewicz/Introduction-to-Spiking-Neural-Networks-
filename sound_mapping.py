@@ -1,5 +1,6 @@
 import numpy as np
-import pretty_midi
+import pretty_midi # for instruments 
+
 """
     Sound mapping was inspired by Sonification and Visualization of Neural Data, by Chang, Mindy & Wang, Ge & Berger, Jonathan.
     this is essentially this written in python 
@@ -14,6 +15,8 @@ import pretty_midi
         samples, and the corresponding note is played, creating a steady
         stream of single notes. This mapping can be used both for single
         trials and condition averaged trials. 
+        
+        NOTE not sure whether to keep the following:
         For the neuronPitch mapping,
         which applies to single trials, each neuron is assigned a unique
         pitch, and a note is played at that pitch each time the neuron spikes.
@@ -30,17 +33,18 @@ import pretty_midi
     
 """
 
-def bin_spikes(spike_timings, t_start, t_end, bin_size = 100):
+# NOTE Trash it ----
+def bin_spikes(spike_timings, t_start, t_end, bin_size = 0.1):
     bins = np.arange(t_start, t_end+bin_size, bin_size) # map out bins
     spikes = np.zeros((len(spike_timings), len(bins)-1))
     
     for i, spike in enumerate(spike_timings):
-        spikes[i] = np.histogram(spike, bin_size)
+        spikes[i], _ = np.histogram(spike, bins=bins)
     return spikes
 
 def spike_rates_to_pitch(rate, r_min, r_max):
     rate = np.clip(rate, r_min, r_max)
-    min_max_normalization = (rate - r_min) / (r_max - r_min) + 1e-9 # normalization; add 1e-9 to avoid zero_div 
+    min_max_normalization = (rate - r_min) / (r_max - r_min + 1e-9) # normalization; add 1e-9 to avoid zero_div 
     
     return int(48 + min_max_normalization * 32) #
 
@@ -49,7 +53,7 @@ def avgRatePitch(binned_spikes, bin_duration = 0.01, sample_frequency = 5):
     pm = pretty_midi.PrettyMIDI() # empty pm object -- will store music
     violin = pretty_midi.Instrument(program=pretty_midi.instrument_name_to_program("Violin"))
     
-    avg_spike_rate = binned_spikes.mean()
+    avg_spike_rate = binned_spikes.mean(axis=0)
     avg_min, avg_max = np.min(avg_spike_rate),np.max(avg_spike_rate)
     
     time_total = bin_duration * binned_spikes
@@ -66,12 +70,16 @@ def avgRatePitch(binned_spikes, bin_duration = 0.01, sample_frequency = 5):
         
     pm.instruments.append(violin)
     return pm
+# NOTE ----
 
+class Spike_to_beeps():
+    def __init__(self):
+        ...
 
-### Following functions are kinda optional, I will make them if there is enough time
-
-def neuronPitch():
-    return
-    
-def eachRatePitch():
-    return
+class Spike_to_music():
+    def __init__(self):
+        self.midi = pretty_midi.PrettyMIDI(initial_tempo=120) # create empty music object
+        
+        
+    def create_music(self, neuron_spike_timings, bin_duration = 0.5):
+        ...
