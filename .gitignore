@@ -1,1 +1,4 @@
 study/
+test/
+*.png
+*.txt

@@ -72,14 +72,29 @@ def avgRatePitch(binned_spikes, bin_duration = 0.01, sample_frequency = 5):
     return pm
 # NOTE ----
 
-class Spike_to_beeps():
+class AvgRatePitch():
     def __init__(self):
-        ...
-
-class Spike_to_music():
-    def __init__(self):
-        self.midi = pretty_midi.PrettyMIDI(initial_tempo=120) # create empty music object
+        self.frequency = (200, 800) # (min, max) Hz
+        self.tempo = 120 
         
+    def bin_spikes(self, neurons, bin_size=0.1):
+        
+        neurons = np.concatenate([np.array(neuron) for neuron in neurons])
+        time_start = neurons.max()
+        time_end = neurons.min()
+        
+        binned_spikes = np.arange(time_start, time_end+bin_size, bin_size)
         
     def create_music(self, neuron_spike_timings, bin_duration = 0.5):
-        ...
+        pass
+    max_time = 0
+
+class Pitch_to_music(AvgRatePitch):
+    def __init__(self):
+        super().__init__()
+        self.midi = pretty_midi.PrettyMIDI(initial_tempo=120) # create empty music object
+        
+    def map_to_midi(self):
+        pass
+    
+    
