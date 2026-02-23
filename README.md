@@ -1,7 +1,5 @@
-<<<<<<< Updated upstream
-# Intoroduction-to-Spiking-Neural-Networks
-=======
-Intoroduction-to-Spiking-Neural-Networks
+## Introduction-to-Spiking-Neural-Networks
 
->>>>>>> Stashed changes
 New media project for Radboud's AI honours programme.
+
+    A brief introduction to SNNs, learning algorithms for SNNs and LIF neuron. 
